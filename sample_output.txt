@@ -1,0 +1,14 @@
+==================================================================
+List of health checks:
+1 : Check if the set of tables is not in conflict with rollback/upgrade
+2 : Check if expected packages are present
+3 : Check if all objects compile
+------------------------------------------------------------------
+Running health checks ...
+------------------------------------------------------------------
+Running health checks complete with errors
+ ERROR: ERROR: Combined rollback/upgrade would add table sd_calc_profile, but it's already present in target snapshot
+ WARNING: Unexpected table analysis_defect in target snapshot (not relevant for rollback/upgrade)
+ WARNING: Missing table sys_log in target snapshot (not relevant for rollback/upgrade)
+ WARNING: check_objects_compile not implemented yet
+==================================================================
