@@ -1,0 +1,7 @@
+[
+	{"name" : "sd_counterparty",
+	"columns" : [
+		{"name" : "cid", "nullable" : false, "datatype" : "VARCHAR2(30)"},
+		{"name" : "name", "nullable" : false, "datatype" : "VARCHAR2("}
+	]}
+]

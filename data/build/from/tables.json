@@ -1,0 +1,13 @@
+[
+	{"name" : "sd_counterparty",
+	"columns" : [
+		{"name" : "cid", "nullable" : false, "datatype" : "VARCHAR2(30)"},
+		{"name" : "name", "nullable" : false, "datatype" : "VARCHAR2("},
+		{"name" : "profile_id", "nullable" : true, "datatype" : "NUMBER(10)"}
+	]},
+	{"name" : "sd_cpty_profile",
+	"columns" : [
+		{"name" : "id", "nullable" : false, "datatype" : "NUMBER(10)"},
+		{"name" : "caption", "nullable" : false, "datatype" : "VARCHAR2(20)"}
+	]}
+]

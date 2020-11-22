@@ -1,0 +1,4 @@
+This is a sample skeleton to run some health checks.
+
+To add a test, simply add a file in the 'checks' folder
+and annotate every check function with @health_check
