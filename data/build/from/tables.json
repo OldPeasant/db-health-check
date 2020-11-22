@@ -9,5 +9,10 @@
 	"columns" : [
 		{"name" : "id", "nullable" : false, "datatype" : "NUMBER(10)"},
 		{"name" : "caption", "nullable" : false, "datatype" : "VARCHAR2(20)"}
+	]},
+	{"name" : "sys_log",
+	"columns" : [
+		{"name" : "message", "nullable" : false, "datatype" : "VARCHAR2(50)"},
+		{"name" : "timestamp", "nullable" : false, "datatype" : "TIMESTAMP"}
 	]}
 ]

@@ -16,5 +16,10 @@
 		{"name" : "id", "nullable" : false, "datatype" : "NUMBER(10)"},
 		{"name" : "perc", "nullable" : false, "datatype" : "NUMBER(100)"},
 		{"name" : "comment", "nullable" : true, "datatype" : "VARCHAR(2)"}
+	]},
+	{"name" : "sys_log",
+	"columns" : [
+		{"name" : "message", "nullable" : false, "datatype" : "VARCHAR2(50)"},
+		{"name" : "timestamp", "nullable" : false, "datatype" : "TIMESTAMP"}
 	]}
 ]
