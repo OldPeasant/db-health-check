@@ -17,7 +17,7 @@ def health_check(title):
         
     return HealthCheck
 
-def run_health_checks():
+def run_health_checks(debug=False):
     result = HealthCheckResult()
     print('==================================================================')
     print('List of health checks:')
@@ -26,7 +26,7 @@ def run_health_checks():
     print('------------------------------------------------------------------')
     print("Running health checks ...")
     for index, hc in enumerate(all_health_checks):
-        hc(result)
+        hc(result, debug)
     print('------------------------------------------------------------------')
     if result.errors:
         print("Running health checks complete with errors")

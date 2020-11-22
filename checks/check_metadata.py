@@ -53,6 +53,9 @@ class TableDelta:
         self.added_tables = []
         self.removed_tables = []
 
+    def __str__(self):
+        return self.short_desc()
+
     def short_desc(self):
         added = ",".join([t.name for t in self.added_tables])
         removed = ",".join([t.name for t in self.removed_tables])
@@ -148,20 +151,31 @@ class SchemaSnapshot:
 def get_snapshot(stage):
     return SchemaSnapshot(os.path.join(DATA_PATH, stage))
 
+
 @health_check('Check if the set of tables is not in conflict with rollback/upgrade')
-def check_tables(result):
+def check_tables(result, debug = False):
+    # Get all snapshots
     snap_from = get_snapshot('build/from')
     snap_base = get_snapshot('build/base')
     snap_to = get_snapshot('build/to')
     snap_target = get_snapshot('target')
     
+    # Build rollback / upgrade / sum of the two
     delta_rollback = build_table_delta(snap_from.tables_snapshot, snap_base.tables_snapshot)
+    if debug:
+        print("Rollback: {}".format(delta_rollback))
     delta_upgrade = build_table_delta(snap_base.tables_snapshot, snap_to.tables_snapshot)
+    if debug:
+        print("Upgrade: {}".format(delta_upgrade))
     evened_delta = even_deltas(delta_rollback, delta_upgrade)
+    if debug:
+        print("Full deployment: {}".format(evened_delta))
     
+    # Check if rollback / upgrade would have DB schema errors
     check_safety(result, snap_target.tables_snapshot, delta_rollback)
     check_safety(result, snap_target.tables_snapshot, evened_delta)
 
+    # Warning for mismatches (not relevant for rollback/upgrade)
     involved_tables = set(delta_rollback.table_names() + delta_upgrade.table_names())
     expected_tables = set(snap_from.tables_snapshot.table_names())
     target_tables = set(snap_target.tables_snapshot.table_names())
@@ -171,7 +185,9 @@ def check_tables(result):
     for t in expected_tables:
         if t not in target_tables:
             result.warnings.append("Missing table {} in target snapshot (not relevant for rollback/upgrade)".format(t))
+
+
 @health_check('Check if expected packages are present')
-def check_packages(result):                            
+def check_packages(result, debug = False):                            
     # ToDo Implement check_packages
     pass
